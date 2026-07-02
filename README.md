@@ -133,6 +133,29 @@ bash deploy.sh up
 
 前端映射端口 `8084`，通过 Nginx 反代 `/api/` 到后端。
 
+### Nginx 域名反代
+
+容器对外只暴露 `8084` 端口，要通过域名 `fastapi-passport.ops.com`（80 端口）访问，需在宿主机 Nginx 添加反向代理：
+
+```nginx
+server {
+    listen 80;
+    server_name fastapi-passport.ops.com;
+
+    location / {
+        proxy_pass http://127.0.0.1:8084;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+```
+
+配置完成后执行 `nginx -t && nginx -s reload`。
+
+> 外层 Nginx 负责域名 → 端口映射，内层 Nginx（容器内）负责静态文件 + `/api/` 代理到后端。
+
 ## 业务系统接入
 
 ### 1. 注册项目
