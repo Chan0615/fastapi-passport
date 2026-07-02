@@ -1,7 +1,7 @@
 #!/bin/bash
 # ═════════════════════════════════════════════════
 # FastAPI Passport 认证中心部署脚本
-# 用法：bash deploy.sh [up|down|restart|logs|clean]
+# 用法：bash deploy.sh [up|down|restart|logs|clean|rebuild]
 # ═════════════════════════════════════════════════
 set -e
 
@@ -54,7 +54,15 @@ case "$ACTION" in
     up)
         pull_code
         cd "$SCRIPT_DIR"
-        echo "🚀 构建并启动服务..."
+        echo "🚀 启动服务（不重建镜像）..."
+        docker compose up -d
+        echo ""
+        docker compose ps
+        ;;
+    rebuild)
+        pull_code
+        cd "$SCRIPT_DIR"
+        echo "🔨 构建并启动服务..."
         docker compose up -d --build
         echo ""
         docker compose ps
@@ -79,7 +87,7 @@ case "$ACTION" in
         docker builder prune -f
         ;;
     *)
-        echo "用法: bash deploy.sh [up|down|restart|logs|clean]"
+        echo "用法: bash deploy.sh [up|down|restart|logs|clean|rebuild]"
         exit 1
         ;;
 esac
