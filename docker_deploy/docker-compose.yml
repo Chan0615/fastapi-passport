@@ -7,8 +7,8 @@ services:
       APP_ENV: prod
     volumes:
       - ../config/config.yaml:/app/config.yaml:ro
-    expose:
-      - "8888"
+    ports:
+      - "8888:8888"
     networks:
       - ops-net
 
