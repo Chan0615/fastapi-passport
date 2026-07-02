@@ -1,6 +1,6 @@
 # FastAPI Passport 认证中心
 
-内网统一认证与授权中心，域名 `http://passport.ops.com/`。
+内网统一认证与授权中心，域名 `http://fastapi-passport.ops.com/`。
 
 将多个业务系统（`*.ops.com`）的登录认证、用户/角色/菜单管理统一收口，各系统通过调用 fastapi_passport 的 API 完成认证和权限获取。
 
@@ -38,7 +38,7 @@
 ### 登录流程
 
 1. 用户在业务系统 LoginPage 输入用户名、密码
-2. 业务系统调用 `POST http://passport.ops.com/api/v1/auth/login`，传入 `{username, password, project_code}`
+2. 业务系统调用 `POST http://fastapi-passport.ops.com/api/v1/auth/login`，传入 `{username, password, project_code}`
 3. passport 通过 LDAP 验证身份，签发 JWT（含 `project_code`）
 4. 返回 `{access_token, user, menus, permissions}`（菜单和权限仅限该 `project_code`）
 5. 业务系统将 token 存入 localStorage，后续请求携带 `Authorization: Bearer <token>`
@@ -152,7 +152,7 @@ bash deploy.sh up
 ```python
 import httpx
 
-resp = httpx.post("http://passport.ops.com/api/v1/auth/login", json={
+resp = httpx.post("http://fastapi-passport.ops.com/api/v1/auth/login", json={
     "username": "zhangsan",
     "password": "xxx",
     "project_code": "your_project_code",
