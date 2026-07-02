@@ -13,15 +13,12 @@ import {
   Table,
   Tag,
   TreeSelect,
-  Typography,
   message,
 } from 'antd';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import * as Icons from '@ant-design/icons';
 import IconPicker from '../../components/IconPicker';
 import { menuApi, projectApi, MenuInfo, ProjectInfo } from '../../services/adminApi';
-
-const { Text } = Typography;
 
 type MenuTreeNode = MenuInfo & { children?: MenuTreeNode[]; level: number };
 

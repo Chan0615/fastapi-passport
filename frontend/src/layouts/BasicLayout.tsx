@@ -16,7 +16,6 @@ import {
   MenuUnfoldOutlined,
   UserOutlined,
   LogoutOutlined,
-  SafetyCertificateOutlined,
 } from '@ant-design/icons';
 import * as Icons from '@ant-design/icons';
 import { useAuth } from '../contexts/AuthContext';

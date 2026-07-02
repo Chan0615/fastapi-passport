@@ -3,7 +3,7 @@ import { Card, Table, Button, Space, Tag, Modal, Form, Input, Select, DatePicker
 import { PlusOutlined, DeleteOutlined, CopyOutlined, EditOutlined } from '@ant-design/icons';
 import { tokenApi, projectApi, TokenInfo, TokenCreateResponse, ProjectInfo } from '../../services/adminApi';
 
-const { Text, Paragraph } = Typography;
+const { Text } = Typography;
 
 export default function TokenList() {
   const [tokens, setTokens] = useState<TokenInfo[]>([]);
