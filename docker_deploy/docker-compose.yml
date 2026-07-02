@@ -1,0 +1,31 @@
+services:
+  backend:
+    build: ../backend
+    container_name: fastapi_passport-backend
+    restart: always
+    environment:
+      APP_ENV: prod
+    volumes:
+      - ../config/config.yaml:/app/config.yaml:ro
+    expose:
+      - "8888"
+    networks:
+      - ops-net
+
+  frontend:
+    build:
+      context: ../frontend
+      args:
+        VITE_API_BASE_URL: /api/v1
+    container_name: fastapi_passport-frontend
+    restart: always
+    ports:
+      - "8084:80"
+    depends_on:
+      - backend
+    networks:
+      - ops-net
+
+networks:
+  ops-net:
+    driver: bridge

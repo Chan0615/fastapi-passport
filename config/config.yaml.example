@@ -1,0 +1,28 @@
+# ========== 系统根配置 ==========
+system_root:
+  ldap: http://ldap.api.com:9099/
+
+# ========== 应用配置 ==========
+app:
+  name: FastAPI Passport 认证中心
+  version: 0.1.0
+  debug: true
+
+# ========== 安全配置 ==========
+security:
+  # JWT 签名密钥（业务系统需使用相同的 secret_key 才能本地验证 JWT）
+  # 生产环境请务必修改为随机的高强度密钥
+  secret_key: CHANGE_ME_IN_PRODUCTION
+  cors_origins:
+    - "*"
+  # Cookie 域名（.ops.com 允许所有子域共享 Cookie，实现 SSO）
+  cookie_domain: .ops.com
+
+# ========== 引导数据库配置 ==========
+mysql:
+  system_default_db:
+    db_addr: 127.0.0.1
+    db_port: 3306
+    db_user: root
+    db_password: your_password
+    db_name: fastapi_passport
